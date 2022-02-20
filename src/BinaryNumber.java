@@ -1,9 +1,3 @@
-
-
-import javax.xml.stream.FactoryConfigurationError;
-import java.awt.image.BufferedImage;
-import java.net.HttpRetryException;
-
 public class BinaryNumber {
     //Little-Endian
     private int length;
@@ -15,6 +9,10 @@ public class BinaryNumber {
     // length and consisting only of zeros.
     // via He Zhao
     public BinaryNumber(int length) {
+        if (length <= 0) {
+            System.out.println("Error: No 0 or nagative lenth.");
+            System.exit(1);
+        }
         this.length = length;
         data = new int[length];
         for (int i = 0; i < length; i++) {
@@ -56,6 +54,10 @@ public class BinaryNumber {
     * via He Zhao
     * */
     public int getDigit(int index) {
+        if (index < 0) {
+            System.out.println("Error: No negative index.");
+            System.exit(1);
+        }
         if (index >= this.length) {
             System.out.println("Error. The index is out of bound.");
             return -1;
@@ -105,7 +107,7 @@ public class BinaryNumber {
     * via He Zhao
     * */
     public void add(BinaryNumber aBinaryNumber) {
-        clearOverFlow();
+        clearOverflow();
         if (aBinaryNumber.length != this.length) {
             System.out.println("Error. These 2 add number`s length is not equal.");
             return;
@@ -132,14 +134,14 @@ public class BinaryNumber {
             return;
         }
         this.data = sum;
-        clearOverFlow();
+        clearOverflow();
     }
 
     /*
     * An operation clearOverFlow() that clears the overflow flag.
     * via He Zhao
     * */
-    public void clearOverFlow() {
+    public void clearOverflow() {
         this.overflow = false;
     }
 
