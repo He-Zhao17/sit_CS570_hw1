@@ -119,6 +119,7 @@ public class BinaryNumber {
             int sum1 = 0;
             if (Ca) {
                 sum1 = this.data[i] + aBinaryNumber.data[i] + 1;
+                Ca = false;
             } else {
                 sum1 = this.data[i] + aBinaryNumber.data[i];
             }
@@ -130,11 +131,9 @@ public class BinaryNumber {
             }
         }
         if (Ca) {
-            System.out.println("Overflow.");
-            return;
+            this.overflow = true;
         }
         this.data = sum;
-        clearOverflow();
     }
 
     /*
@@ -153,6 +152,9 @@ public class BinaryNumber {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.length; i++) {
             sb.append(this.data[i]);
+        }
+        if (this.overflow) {
+            sb.append(" Overflow");
         }
         return sb.toString();
     }
@@ -198,8 +200,11 @@ public class BinaryNumber {
 
         //Test the add()
         System.out.println("\n\nNow test the add():");
-        BinaryNumber bn1 = new BinaryNumber("11111111");
-        BinaryNumber bn2 = new BinaryNumber("11111");
+        BinaryNumber bn1 = new BinaryNumber("10");
+        BinaryNumber bn2 = new BinaryNumber("11");
+        bn1.add(bn2);
+        System.out.println("kkk:" + bn1.toString());
+
         BinaryNumber bnAdd = bn;
         bnAdd.add(bn1);
         System.out.print("\n00001011 + 11111111 = ");
